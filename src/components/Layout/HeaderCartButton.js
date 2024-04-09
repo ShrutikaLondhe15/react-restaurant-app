@@ -6,18 +6,22 @@ import CartContext from "../../store/CartContext";
 const HeaderCartButton = props =>{
    const cartCtx = useContext(CartContext);
 
-   const noOfCartItems = cartCtx.items.reduce((currentNo,item) => {
-    return currentNo+item.amount;
-   }, 0);
+let quantity=0;
+cartCtx.items.forEach(item=>{
+    quantity=quantity+ Number(item.quantity)
+})
 
-   
-   return <button className={classes.button} onClick={props.onClick}>
+//    const noOfCartItems = cartCtx.items.reduce((currentNo,item) => {
+//     return currentNo+item.amount;
+//    }, 0);
+
+return <button className={classes.button} onClick={props.onClick}>
         <span className={classes.icon}>
             <CartIcon/>
         </span>
         <span>Your Cart</span>
         <span className={classes.badge}>
-            {noOfCartItems}
+            {quantity}
         </span>
         <span></span>
     </button>

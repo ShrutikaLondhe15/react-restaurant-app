@@ -4,15 +4,27 @@ import { useState } from "react"
 const CartProvider = props =>{
     const [items,updateItems]=useState([])
 
-    const addItemToCartHandler = item => {
-        updateItems([...items,item])
-       console.log("inside addItemCartHandler",cartContext)
+    const addItemToCartHandler = (item) => {
+        const existingItem = items.findIndex((cartItem) => cartItem.name === item.name);
+
+        if (existingItem!==-1) {
+            const updatedItems = [...items];
+            console.log("Number(item.quantity)",typeof(Number(item.quantity)))
+            updatedItems[existingItem].quantity=Number(updatedItems[existingItem].quantity) + Number(item.quantity);
+
+            console.log("updatedItems",updatedItems)
+          updateItems(updatedItems);
+        } else {
+          updateItems([...items, item]);
+        }
+      };
+
+    const removeItemFromCartHandler = id => {
+        
     };
 
-    const removeItemFromCartHandler = id => {};
-
     const cartContext = {
-        items: [],
+        items: items,
         totalAmount: 0,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler

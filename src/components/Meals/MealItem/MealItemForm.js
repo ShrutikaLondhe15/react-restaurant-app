@@ -6,15 +6,16 @@ import CartContext from '../../../store/CartContext';
 
 const MealItemForm =  props =>{
   const cartCtx=useContext(CartContext)
+  
   const addItemToCart=(event)=>{
     event.preventDefault();
     // console.log("cartCtx",cartCtx)    
+
     const quantity=document.getElementById('amount_'+props.id).value
     cartCtx.addItem({...props.item,quantity:quantity})
     console.log("cartCtx.items",cartCtx)
 
 }
-
 
     return <form className={classes.form}>
 
